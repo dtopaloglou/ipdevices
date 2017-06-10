@@ -1,0 +1,21 @@
+﻿<Window x:Class="IPdevices.MyDevices"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IPdevices"
+        mc:Ignorable="d"
+        Title="My Devices" Height="254.508" Width="468.443" Icon="Resources/ipdevices_nowriting.ico" ResizeMode="NoResize">
+    <Grid >
+        <DataGrid RowBackground="White" SelectionMode="Single"
+AlternatingRowBackground="LightBlue" RowHeight="30" ItemsSource="{Binding Devices}" IsReadOnly="True" AutoGenerateColumns="False" GridLinesVisibility="All" CanUserAddRows="False" HorizontalGridLinesBrush="#FFCFCBCB" FontSize="14.667" VerticalGridLinesBrush="#FFD4D4D4">
+            <DataGrid.Columns>
+               
+                <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn IsReadOnly="True" Header="IP" Binding="{Binding IP}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Date" Binding="{Binding Date}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>

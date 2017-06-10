@@ -1,0 +1,130 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IPdevices"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+        x:Class="IPdevices.Main"
+        mc:Ignorable="d"
+        Title="IPDevices" Height="316.698" Width="531.659" Background="White" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Icon="Resources/ipdevices.ico" BorderThickness="1">
+    <Window.BorderBrush>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="DeepSkyBlue" Offset="0"/>
+            <GradientStop Color="Blue" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.BorderBrush>
+    <Grid>
+        <Menu x:Name="menu" VerticalAlignment="Top"  Height="23" FontSize="13.333" >
+            <MenuItem Header="_File">
+
+                <MenuItem Header="Exit" Command="{Binding CloseCommand}" />
+
+
+            </MenuItem>
+
+            <MenuItem Header="Edit">
+                <MenuItem Header="Copy IP Address"  Command="{Binding CopyToClipboard}"/>
+                <Separator/>
+                <MenuItem Header="Preferences" Command="{Binding ShowPreferences}"/>
+            </MenuItem>
+            <MenuItem Header="Devices">
+                <MenuItem Header="Register" Command="{Binding RegisterDevice}" IsEnabled="{Binding IsRegisterEnable, UpdateSourceTrigger=PropertyChanged}"/>
+                <MenuItem Header="Unregister" Command="{Binding UnregisterDevice}" IsEnabled="{Binding IsUnregisterEnable, UpdateSourceTrigger=PropertyChanged}"/>
+                <Separator/>
+                <MenuItem Header="My devices" Command="{Binding OpenMyDevices}"/>
+
+            </MenuItem>
+            <MenuItem Header="Help">
+
+                <MenuItem Header="Sign Up"/>
+                <MenuItem Header="Forgot Password" />
+                <Separator/>
+                <MenuItem Header="Sign In" Command="{Binding SignIn}" IsEnabled="{Binding IsSigninEnable, UpdateSourceTrigger=PropertyChanged}" />
+  
+
+            </MenuItem>
+        </Menu>
+        <Grid Margin="0,23,0,24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="101*"/>
+                <RowDefinition Height="19*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="302"/>
+                <ColumnDefinition Width="284"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox x:Name="groupBox" Header="Status" VerticalAlignment="Top" Margin="7,12,9,0" Height="101">
+                <Grid  >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" MinHeight="26"/>
+                        <RowDefinition Height="Auto" MinHeight="26"/>
+                        <RowDefinition Height="Auto" MinHeight="39"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="78"/>
+                        <ColumnDefinition Width="83*"/>
+                        <ColumnDefinition Width="15*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label DataContext="Client" Content="Client ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="78"/>
+                    <Label VerticalAlignment="Top"   Content="{Binding ClientEmail}" Height="26" Grid.Column="1" HorizontalAlignment="Left" Width="166" />
+                    <Label Content="IP:" HorizontalAlignment="Left" VerticalAlignment="Top"   Height="26" Width="23" Grid.Row="1"/>
+                    <Label VerticalAlignment="Top" Content="{Binding ADD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="26" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="198" Grid.ColumnSpan="2" Margin="0,0,-2,0"/>
+                    <Label Content="{Binding Timer, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Width="198" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="0,0,-2,0"/>
+                    <Label Content="Next check:" Grid.Row="2" HorizontalAlignment="Left" Width="78" Height="26" VerticalAlignment="Top" />
+                    <Image HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="14" Grid.Column="2" Source="{Binding CImageSource}" Margin="7,5,0,0"/>
+                </Grid>
+            </GroupBox>
+            <Image x:Name="image"  Source="Resources/ipdevices.png" Margin="51,23,0,0" Height="82" VerticalAlignment="Top" Grid.Column="1" HorizontalAlignment="Left" Width="102"/>
+            <Button x:Name="button" Content="Refresh" Style="{StaticResource Refresh}" IsEnabled="{Binding isRefreshEnable}" Command="{Binding RefreshIP}" Foreground="White" FontWeight="Bold" VerticalAlignment="Bottom" Height="20" Grid.ColumnSpan="2" Margin="0,0,62,0" Grid.Row="1"/>
+
+
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding ADD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="64" Width="204"   FontSize="32" Grid.Column="1" Margin="0,110,80,28"/>
+            <GroupBox Header="Device" VerticalAlignment="Top" Margin="7,118,9,0" Height="77">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" MinHeight="26"/>
+                        <RowDefinition Height="Auto" MinHeight="26"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="78"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Label DataContext="Client" Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="78"/>
+                    <Label Content="Location:" HorizontalAlignment="Left" VerticalAlignment="Top"   Height="26" Width="78" Grid.Row="1"/>
+                    <Label Content="{Binding DeviceName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="168" Height="26" VerticalAlignment="Top"  Grid.Column="1"/>
+                    <Label Content="{Binding DeviceLocation, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" HorizontalAlignment="Left" Width="168" Height="26" VerticalAlignment="Top"   Grid.Column="1" />
+                    <Image HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="14" Grid.Column="2" Source="{Binding DImageSource}" Margin="7,5,0,0"/>
+                </Grid>
+            </GroupBox>
+
+        </Grid>
+
+        <DockPanel Height="24" VerticalAlignment="Bottom" Margin="0,0,0,-0.333">
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBar.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition  Width="74" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto"  />
+                                <ColumnDefinition  />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </StatusBar.ItemsPanel>
+                <StatusBarItem  >
+                    <TextBlock Text="{Binding TimeFound, UpdateSourceTrigger=PropertyChanged}" />
+                </StatusBarItem>
+                <StatusBarItem Grid.Column="2" >
+                    <TextBlock Text="Remote IP found:"  />
+                </StatusBarItem>
+                <StatusBarItem Grid.Column="3" >
+                    <TextBlock Text="{Binding ADD, UpdateSourceTrigger=PropertyChanged}"    />
+                </StatusBarItem>
+            </StatusBar>
+        </DockPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,40 @@
+﻿
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:IPdevices"
+    xmlns:tb="http://www.hardcodet.net/taskbar">
+
+
+    <tb:TaskbarIcon x:Key="MyNotifyIcon"   
+		Visibility="Visible"
+		ToolTipText="-"
+		IconSource="/Resources/ipdevices_nowriting.ico"
+		MenuActivation="RightClick"
+        DoubleClickCommand="{Binding ShowApp}">
+        <tb:TaskbarIcon.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Copy IP Address" Command="{Binding MainViewModel.CopyToClipboard}" />
+                <MenuItem Header="Refresh" Command="{Binding MainViewModel.RefreshIP}" />
+                <Separator/>
+                <MenuItem Header="Exit" Command="{Binding ExitApplication}" />
+            </ContextMenu>
+        </tb:TaskbarIcon.ContextMenu>
+        <tb:TaskbarIcon.TrayToolTip>
+            <Border Background="White" BorderThickness="2"  BorderBrush="White">
+                <TextBlock
+					Text="{Binding MainViewModel.ADD, UpdateSourceTrigger=PropertyChanged}"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+                />
+            </Border>
+        </tb:TaskbarIcon.TrayToolTip>
+
+
+
+    </tb:TaskbarIcon>
+
+
+
+</ResourceDictionary>

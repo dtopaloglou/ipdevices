@@ -1,0 +1,45 @@
+﻿<Window x:Class="IPdevices.Register"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IPdevices"
+        mc:Ignorable="d"
+        Title="Register" Height="233.051" Width="413.852" Icon="Resources/ipdevices_nowriting.ico" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <GroupBox x:Name="groupBox" Header="Device" VerticalAlignment="Top" RenderTransformOrigin="0.877,2.187" Margin="10,10,10,0" Height="114">
+            <Grid Margin="0,0,3,3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="47*"/>
+                    <RowDefinition Height="49*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="146*"/>
+                    <ColumnDefinition Width="197*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Height="24" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.Column="1" Margin="0,6,0,0" Text="{Binding Path=DeviceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true, NotifyOnValidationError=true}">
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+                            <StackPanel>
+                                <!-- Placeholder for the TextBox itself -->
+                                <AdornedElementPlaceholder x:Name="textBox"/>
+                                <ItemsControl ItemsSource="{Binding}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding ErrorContent}" Foreground="Red"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </TextBox>
+                <Label   Content="Device Name:" RenderTransformOrigin="1.372,1.475" Margin="10,2,10,0" Height="28" VerticalAlignment="Top"/>
+                <TextBox   Height="23" TextWrapping="Wrap" Text="{Binding Location, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Margin="0,7,0,0" Grid.Row="1" Grid.Column="1"/>
+                <Label  Content="Location:" Margin="10,3,10,0" Grid.Row="1" Height="27" VerticalAlignment="Top"/>
+            </Grid>
+        </GroupBox>
+        <Button  Content="Register" Height="25" VerticalAlignment="Top" Margin="10,162,10,0" IsDefault="True" ToolTip="Register" Command="{Binding Register}"  />
+        <Label Content="{Binding RegisterMsg, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,130,0,0" Width="392"/>
+    </Grid>
+</Window>
